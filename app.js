@@ -59,25 +59,44 @@ const productSchema = mongoose.Schema(
       },
       required: true,
     },
-    supplier: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Supplier",
-    },
-    categories: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        _id: mongoose.Schema.Types.ObjectId,
-      },
-    ],
+    // supplier: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Supplier",
+    // },
+    // categories: [
+    //   {
+    //     name: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //     _id: mongoose.Schema.Types.ObjectId,
+    //   },
+    // ],
   },
   { timestamps: true }
 );
 
+const Product = mongoose.model("Product", productSchema);
+
 app.get("/", (req, res) => {
   res.send("Inventory Management Route");
+});
+
+app.post("/api/v1/product", async (req, res) => {
+  try {
+    const data = await Product.create(req.body);
+    // const product = new Product(req.body);
+    // const data = await product.save();
+    res
+      .status(200)
+      .json({ status: "success", message: "Data inserted successfully", data });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Something Wen't Wrong",
+      error: error.message,
+    });
+  }
 });
 
 module.exports = app;
