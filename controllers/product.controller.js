@@ -9,15 +9,21 @@ const {
 } = require("../services/product.services");
 
 exports.getProducts = async (req, res) => {
-  try {
-    const products = await getProductService(
-      req.query.page * req.query.resultsPerPage,
-      req.query.resultsPerPage
-    );
+    const filters = {...req.query};
+    const excludeFields = ["sort", "page", "limit"];
+    excludeFields.forEach((field) => delete filters[field]);
+
+    const queries = {};
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
+    }
+    if(req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+    }
+    const products = await getProductService(filters, queries);
     res.status(200).json(products);
-  } catch (error) {
-    res.status(400).json({ error });
-  }
 };
 
 exports.createProduct = async (req, res) => {
