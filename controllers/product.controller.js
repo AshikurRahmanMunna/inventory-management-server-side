@@ -6,7 +6,7 @@ const {
   bulkUpdateProductService,
   deleteProductByIdService,
   bulkDeleteProductService,
-} = require("../services/product.services");
+} = require("../services/product.service");
 
 exports.getProducts = async (req, res) => {
   try {

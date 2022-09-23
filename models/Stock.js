@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+const validator = require("validator");
 
 const stockSchema = mongoose.Schema(
   {
@@ -30,24 +31,27 @@ const stockSchema = mongoose.Schema(
           "unit value can't be {VALUE}, must be ton/kg/gram/bag/litre/pcs/box or cartoon",
       },
     },
-    imageURLs: {
-      type: String,
-      validate: {
-        validate: (value) => {
-          if (!Array.isArray(value)) {
-            return false;
-          }
-          let isValid = true;
-          value.forEach((url) => {
-            if (!validator.irURL(url)) {
-              isValid = false;
+    imageURLs: [
+      {
+        type: String,
+        required: true,
+        validate: {
+          validator: (value) => {
+            if (!Array.isArray(value)) {
+              return false;
             }
-          });
-          return isValid;
+            let isValid = true;
+            value.forEach((url) => {
+              if (!validator.isURL(url)) {
+                isValid = false;
+              }
+            });
+            return isValid;
+          },
+          message: "Please provide valid image urls",
         },
-        message: "Please Provide Valid Image URLs",
       },
-    },
+    ],
 
     price: {
       type: Number,
