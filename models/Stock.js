@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
-const productSchema = mongoose.Schema(
+const stockSchema = mongoose.Schema(
   {
+    productId: {
+      type: ObjectId,
+      required: true,
+      ref: "Product",
+    },
     name: {
       type: String,
       required: [true, "Please provide a name for this product"],
@@ -44,6 +49,16 @@ const productSchema = mongoose.Schema(
       },
     },
 
+    price: {
+      type: Number,
+      required: true,
+      min: [0, "Price can't be negative"],
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      min: [0, "Quantity can't be negative"],
+    },
     category: {
       type: String,
       required: true,
@@ -52,7 +67,6 @@ const productSchema = mongoose.Schema(
         ref: "Category",
       },
     },
-
     brand: {
       name: {
         type: String,
@@ -61,6 +75,42 @@ const productSchema = mongoose.Schema(
       id: {
         type: ObjectId,
         ref: "Brand",
+      },
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: {
+        values: ["in-stock", "out-of-stock", "discontinued"],
+        message: "Status can't be {VALUE}",
+      },
+    },
+    store: {
+      name: {
+        type: String,
+        required: [true, "Please provide a name for this product"],
+        trim: true,
+        unique: [true, "Name must be unique"],
+        lowercase: true,
+        minLength: [3, "Name must be at least 3 characters"],
+        maxLength: [100, "Name is too large"],
+      },
+      id: {
+        type: ObjectId,
+        required: true,
+        ref: "Store",
+      },
+    },
+    suppliedBy: {
+      name: {
+        type: String,
+        required: [true, "Please provide a supplier name product"],
+        trim: true,
+      },
+      id: {
+        type: ObjectId,
+        required: true,
+        ref: "Supplier",
       },
     },
   },
@@ -75,10 +125,10 @@ const productSchema = mongoose.Schema(
 //   next();
 // });
 
-productSchema.methods.logger = function () {
+stockSchema.methods.logger = function () {
   console.log(`Data saved for ${this.name}`);
 };
 
-const Product = mongoose.model("Product", productSchema);
+const Stock = mongoose.model("Stock", stockSchema);
 
-module.exports = Product;
+module.exports = Stock;
