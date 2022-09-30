@@ -30,7 +30,7 @@ exports.getBrands = async (req, res) => {
   } catch (error) {
     res.status(200).json({
       status: "fail",
-      error: "Couldn't get the brands",
+      error: "Couldn't get brands",
     });
   }
 };

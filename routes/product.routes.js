@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const {
   createProduct,
   getProducts,
@@ -5,10 +6,15 @@ const {
   bulkUpdateProduct,
   deleteProductById,
   bulkDeleteProduct,
+  fileUpload,
 } = require("../controllers/product.controller");
+const uploader = require("../middleware/uploader");
 
-const router = require("express").Router();
 
+
+
+
+router.post('/file-upload', uploader.array("image"), fileUpload);
 router.route("/").get(getProducts).post(createProduct);
 router.route("/bulk-update").patch(bulkUpdateProduct);
 router.route("/bulk-delete").delete(bulkDeleteProduct);

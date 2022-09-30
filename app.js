@@ -5,6 +5,7 @@ const cors = require("cors");
 // routes
 const productRoutes = require("./routes/product.routes");
 const brandRoutes = require("./routes/brand.routes");
+const categoryRoutes = require("./routes/category.routes");
 
 // middleware
 app.use(express.json());
@@ -18,5 +19,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/brand", brandRoutes);
+app.use("/api/v1/brand", categoryRoutes);
 
 module.exports = app;
