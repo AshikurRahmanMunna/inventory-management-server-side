@@ -1,7 +1,7 @@
 const {
   getCategoryService,
   createCategoryService,
-} = require("../services/category.services");
+} = require("../services/category.service");
 
 exports.getCategories = async (req, res) => {
   try {

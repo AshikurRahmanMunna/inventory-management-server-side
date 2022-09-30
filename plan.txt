@@ -1,0 +1,14 @@
+[+] Device detection and limit to 1
+[+] Location tracking of suppliers
+[+] Serialized Account Number
+[+] Investment system
+[+] Loan
+[+] Company expense
+[+] Personal expense
+[+] Salary management
+[+] Purchase Invoice
+[+] Sales Invoice
+[+] Return Management
+[+] Discount
+[+] Commission 
+[+] Loss & Profit management

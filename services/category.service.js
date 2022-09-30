@@ -5,6 +5,6 @@ exports.getCategoryService = async () => {
   return results;
 };
 exports.createCategoryService = async (data) => {
-  const result = await Category.create(data);
+  const RESULT = await Category.create(data);
   return result;
 };

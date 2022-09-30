@@ -47,12 +47,12 @@ const supplierSchema = mongoose.Schema(
     ],
     companyName: {
       type: String,
-      required: [true, "Please provide a name"],
+      required: [true, "Please provide a company name"],
       trim: true,
       minLength: [3, "Name must be at least 3 characters"],
       maxLength: [100, "Name is too large"],
     },
-    contactNumber: {
+    contactNumbers: [{
       type: String,
       required: [true, "Please Provide a contact number"],
       validate: {
@@ -61,7 +61,7 @@ const supplierSchema = mongoose.Schema(
         },
         message: "Please provide a valid phone number",
       },
-    },
+    }],
     emergencyContactNumber: {
       type: String,
       required: [true, "Please Provide a emergency contact number"],
@@ -152,3 +152,5 @@ const supplierSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+const Supplier = mongoose.model("Supplier", supplierSchema);
+module.exports = Supplier;
