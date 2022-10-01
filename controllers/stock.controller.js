@@ -1,12 +1,12 @@
 const Product = require("../models/Product");
 const {
-  getStockService,
   createStockService,
   updateProductByIdService,
   bulkUpdateProductService,
   deleteProductByIdService,
   bulkDeleteProductService,
   getStockByIdService,
+  getStocksService,
 } = require("../services/stock.service");
 
 exports.getStocks = async (req, res) => {
@@ -36,7 +36,7 @@ exports.getStocks = async (req, res) => {
       queries.skip = skip;
       queries.limit = limit;
     }
-    const stocks = await getStockService(filters, queries);
+    const stocks = await getStocksService(filters, queries);
     res.status(200).json(stocks);
   } catch (error) {
     res.status(400).json({

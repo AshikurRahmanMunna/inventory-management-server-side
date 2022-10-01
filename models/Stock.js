@@ -35,7 +35,7 @@ const stockSchema = mongoose.Schema(
       {
         type: String,
         required: true,
-        validate: [validator.isURL, "Please provide a valid url"]
+        validate: [validator.isURL, "Please provide a valid url"],
       },
     ],
 
@@ -50,8 +50,10 @@ const stockSchema = mongoose.Schema(
       min: [0, "Quantity can't be negative"],
     },
     category: {
-      type: String,
-      required: true,
+      name: {
+        type: String,
+        required: true,
+      },
       id: {
         type: ObjectId,
         ref: "Category",
@@ -104,10 +106,10 @@ const stockSchema = mongoose.Schema(
       },
     },
     sellCount: {
-      type:Number,
+      type: Number,
       default: 0,
-      min: 0
-    }
+      min: 0,
+    },
   },
   { timestamps: true }
 );

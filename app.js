@@ -8,6 +8,7 @@ const brandRoutes = require("./routes/brand.routes");
 const categoryRoutes = require("./routes/category.routes");
 const supplierRoutes = require("./routes/supplier.routes");
 const stockRoutes = require("./routes/stock.routes");
+const storeRoutes = require("./routes/store.routes");
 
 // middleware
 app.use(express.json());
@@ -24,5 +25,6 @@ app.use("/api/v1/brand", brandRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/supplier", supplierRoutes);
 app.use("/api/v1/stock", stockRoutes);
+app.use("/api/v1/store", storeRoutes);
 
 module.exports = app;
