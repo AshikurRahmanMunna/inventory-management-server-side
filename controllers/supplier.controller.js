@@ -14,7 +14,7 @@ exports.createSupplier = async (req, res) => {
     });
   } catch (error) {
     console.log(error)
-    res.status(200).json({
+    res.status(500).json({
       status: "fail",
       data: "Couldn't create the supplier",
     });
@@ -29,7 +29,7 @@ exports.getSuppliers = async (req, res) => {
       data: suppliers,
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(500).json({
       status: "fail",
       error: "Couldn't get suppliers",
     });
@@ -51,7 +51,7 @@ exports.getSupplierById = async (req, res) => {
       data: supplier,
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(500).json({
       status: "fail",
       error: "Couldn't get the supplier",
     });
@@ -73,7 +73,7 @@ exports.updateSupplierById = async (req, res) => {
       message: "Successfully Updated The Supplier",
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(500).json({
       status: "fail",
       error: "Couldn't get the supplier",
     });
