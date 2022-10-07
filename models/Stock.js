@@ -38,7 +38,6 @@ const stockSchema = mongoose.Schema(
         validate: [validator.isURL, "Please provide a valid url"],
       },
     ],
-
     price: {
       type: Number,
       required: true,
